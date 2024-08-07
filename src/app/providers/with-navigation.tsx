@@ -6,9 +6,9 @@ export const withNavigation = (Component: FC): FC => {
   return (props) => {
     return (
       <SafeAreaProvider>
-        {/* <NavigationContainer> */}
-        <Component {...props} />
-        {/* </NavigationContainer> */}
+        <NavigationContainer>
+          <Component {...props} />
+        </NavigationContainer>
       </SafeAreaProvider>
     )
   }

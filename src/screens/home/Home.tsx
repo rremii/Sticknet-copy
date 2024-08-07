@@ -1,11 +1,10 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { RootNavigationProps } from '../../app/navigation/types'
 
 export const Home = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<RootNavigationProps>()
 
   const goToProfile = () => {
     navigation.navigate('Profile')
