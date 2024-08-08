@@ -2,10 +2,13 @@ import { FC, useEffect, useRef, useState } from 'react'
 import { Text, StyleSheet, Dimensions, Animated } from 'react-native'
 import { ModalProps } from '../../shared/moduls/modals/types'
 import { Overlay } from '../../shared/ui/Overlay'
+import { useModal } from '../../shared/moduls/modals/useModal'
 
 interface Props extends ModalProps {}
 
-export const ActionsModal: FC<Props> = ({ isOpen, name, closeModal }) => {
+export const ActionsModal: FC<Props> = ({ isOpen, name }) => {
+  const { closeModal } = useModal()
+
   const slideAnim = useRef(new Animated.Value(500)).current
 
   useEffect(() => {
@@ -26,7 +29,7 @@ export const ActionsModal: FC<Props> = ({ isOpen, name, closeModal }) => {
 
   return (
     <>
-      <Overlay isActive={isOpen} onPress={closeModal} />
+      <Overlay isActive={isOpen} onPress={() => closeModal(name, 500)} />
       <Animated.View
         style={[styles.modal, { transform: [{ translateY: slideAnim }] }]}
       >

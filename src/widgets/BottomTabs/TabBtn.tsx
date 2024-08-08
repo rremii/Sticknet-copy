@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { StyleSheet } from 'react-native'
-import Home from './../../../assets/home.svg'
+import Home from '@icons/home.svg'
 
 interface Props extends PropsWithChildren {
   onPress: () => void

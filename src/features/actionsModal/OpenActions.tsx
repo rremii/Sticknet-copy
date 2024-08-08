@@ -8,14 +8,14 @@ import { useModal } from '../../shared/moduls/modals/useModal'
 export const OpenActions = () => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const { openModal: open } = useModal()
+  const { openModal } = useModal()
 
-  const openModal = () => {
-    open('Actions')
+  const onPress = () => {
+    openModal({ name: 'Actions', modal: ActionsModal })
   }
 
   return (
-    <TouchableOpacity onPress={openModal} style={styles.openBtn}>
+    <TouchableOpacity onPress={onPress} style={styles.openBtn}>
       <Text style={styles.textContent}>+</Text>
     </TouchableOpacity>
   )

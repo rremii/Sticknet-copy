@@ -6,19 +6,24 @@ import { Vault } from '../../screens/vault/Vault'
 import { Chats } from '../../screens/chats/Chats'
 import { BottomTabs } from '../../widgets/BottomTabs/BottomTabs'
 import { AuthEmail } from '../../screens/authEmail/AuthEmail'
-import { AuthCode } from '../../screens/authCode/AuthCode'
-import { AuthPassword } from '../../screens/authPassword/AuthPassword'
 import { createStackNavigator } from '@react-navigation/stack'
+import { SignIn } from '../../screens/signIn/SignIn'
+import { SignUp } from '../../screens/signUp/SignUp'
+import { AuthNavigationParam, RootNavigationParam } from './types'
 
-const Tab = createBottomTabNavigator()
-const AuthStack = createStackNavigator()
+const Tab = createBottomTabNavigator<RootNavigationParam>()
+const AuthStack = createStackNavigator<AuthNavigationParam>()
 
 const AuthNavigation = () => {
   return (
     <AuthStack.Navigator screenOptions={{ headerShown: false }}>
-      <AuthStack.Screen name="Email" component={AuthEmail} />
-      <AuthStack.Screen name="Code" component={AuthCode} />
-      <AuthStack.Screen name="Password" component={AuthPassword} />
+      <AuthStack.Screen
+        initialParams={{ type: 'signIn' }}
+        name="Email"
+        component={AuthEmail}
+      />
+      <AuthStack.Screen name="SignIn" component={SignIn} />
+      <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="Root" component={RootNavigation} />
     </AuthStack.Navigator>
   )

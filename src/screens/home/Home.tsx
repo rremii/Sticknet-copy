@@ -1,13 +1,14 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { RootNavigationProps } from '../../app/navigation/types'
+import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs'
+import { RootNavigationParam } from '../../app/navigation/types'
 
 export const Home = () => {
-  const navigation = useNavigation<RootNavigationProps>()
+  // const navigation = useNavigation<BottomTabBarButtonProps<RootNavigationParam, 'Profile'>>()
 
   const goToProfile = () => {
-    navigation.navigate('Profile')
+    //   navigation.navigate('Profile')
   }
 
   return (

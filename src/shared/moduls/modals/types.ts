@@ -6,12 +6,12 @@ export interface IModal {
   isOpen: boolean
   modal: FC<ModalProps>
   name: ModalNames
+  props: any // TODO: fix some how
 }
 
 export interface ModalProps {
   name: ModalNames
   isOpen: boolean
-  closeModal: () => void
 }
 
 type Action<T, P> = {
@@ -19,15 +19,18 @@ type Action<T, P> = {
   payload: P
 }
 
-export interface RegisterModal {
-  modal: FC<ModalProps>
+export interface RegisterModal<PropsType> {
+  modal: FC<PropsType & ModalProps>
   name: ModalNames
+  props?: PropsType
 }
-type RegisterModalAction = Action<'register', RegisterModal>
-type OpenModalAction = Action<'open', ModalNames>
-type CloseModalAction = Action<'close', ModalNames>
+export type AddModalAction<PropsType> = Action<'add', RegisterModal<PropsType>>
+export type RemoveModalAction = Action<'remove', ModalNames>
+export type CloseModalAction = Action<'close', ModalNames>
+// export type OpenModalAction = Action<'open', ModalNames>
 
 export type ModalAction =
-  | RegisterModalAction
-  | OpenModalAction
+  | AddModalAction<any> // TODO: fix some how
   | CloseModalAction
+  | RemoveModalAction
+// | OpenModalAction

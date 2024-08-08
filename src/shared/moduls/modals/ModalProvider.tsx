@@ -5,38 +5,26 @@ import {
   useEffect,
   useReducer,
 } from 'react'
-import { initialState, ModalContext, ModalReducer } from './modalStore'
+import {
+  addModal,
+  closeModal,
+  initialState,
+  ModalContext,
+  ModalReducer,
+  removeModal,
+} from './modalStore'
 import { ModalNames, RegisterModal } from './types'
+import { useModal } from './useModal'
 
-interface Props extends PropsWithChildren {
-  modals: RegisterModal[]
-}
+interface Props extends PropsWithChildren {}
 
-export const ModalProvider: FC<Props> = ({ children, modals }) => {
+export const ModalProvider: FC<Props> = ({ children }) => {
   const [modalState, dispatch] = useReducer(ModalReducer, initialState)
-
-  useEffect(() => {
-    modals.forEach(({ modal, name }) => {
-      dispatch({ type: 'register', payload: { modal, name } })
-    })
-  }, [modals])
-
-  const closeModal = (name: ModalNames) => {
-    dispatch({ type: 'close', payload: name })
-  }
 
   return (
     <ModalContext.Provider value={{ modals: modalState.modals, dispatch }}>
-      {modalState.modals.map(({ modal: Modal, name, isOpen }) => {
-        if (isOpen)
-          return (
-            <Modal
-              closeModal={() => closeModal(name)}
-              key={name}
-              name={name}
-              isOpen={isOpen}
-            />
-          )
+      {modalState.modals.map(({ modal: Modal, name, isOpen, props }) => {
+        return <Modal key={name} name={name} isOpen={isOpen} {...props} />
       })}
 
       {children}
