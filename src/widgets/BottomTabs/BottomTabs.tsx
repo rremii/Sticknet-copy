@@ -1,41 +1,9 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import React from 'react'
-import {
-  View,
-  Text,
-  FlatList,
-  Modal,
-  LayoutChangeEvent,
-  Dimensions,
-} from 'react-native'
+import { View } from 'react-native'
 import { TabBtn } from './TabBtn'
 import { StyleSheet } from 'react-native'
-
-const OpenActions = () => {
-  return (
-    <>
-      <Text>OpenActions</Text>
-      <View style={actionsStyles(-500).modal}>
-        <Text>Modal</Text>
-      </View>
-    </>
-  )
-}
-
-const actionsStyles = (bottom: number = 0) =>
-  StyleSheet.create({
-    modal: {
-      position: 'absolute',
-      bottom,
-      zIndex: 100,
-      left: 0,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(49, 176, 102, 0.5)',
-      width: Dimensions.get('window').width,
-      height: 500,
-    },
-  })
+import { OpenActions } from '../../features/actionsModal/OpenActions'
 
 export const BottomTabs = ({ navigation, state }: BottomTabBarProps) => {
   const goToTab = (routeName: keyof typeof state.routeNames) => {
@@ -44,20 +12,20 @@ export const BottomTabs = ({ navigation, state }: BottomTabBarProps) => {
 
   return (
     <View style={styles.container}>
-      {state.routeNames.map((route, index) => {
+      {state.routes.map((route, index) => {
         const isMiddleIndex =
-          index === Math.round((state.routes.length - 1) / 2)
+          index === Math.floor((state.routeNames.length - 1) / 2)
 
         return isMiddleIndex ? (
           <>
-            <OpenActions />
-            <TabBtn key={index} onPress={() => goToTab(route)}>
-              {route}
+            <TabBtn key={route.key} onPress={() => goToTab(route)}>
+              {route.name}
             </TabBtn>
+            <OpenActions />
           </>
         ) : (
-          <TabBtn key={index} onPress={() => goToTab(route)}>
-            {route}
+          <TabBtn key={route.key} onPress={() => goToTab(route)}>
+            {route.name}
           </TabBtn>
         )
       })}
@@ -76,6 +44,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     height: 50,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
   },
 })
