@@ -14,32 +14,16 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { authFormStyles } from '@shared/ui/authFormStyles'
 import { auth } from 'firebase'
 import { getAuth } from 'firebase/auth'
-
-interface FormValues {
-  email: string
-}
+import React from 'react'
+import { EmailForm } from '@entities/auth/ui/EmailForm'
 
 export const AuthEmail = () => {
   const navigation =
     useNavigation<StackNavigationProp<AuthNavigationParam, 'SignIn'>>()
   const { params } = useRoute<RouteProp<AuthNavigationParam, 'Email'>>()
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormValues>()
-
-  const onSubmit = ({ email }: FormValues) => {
-    reset({ email: '' })
-    if (params.type === 'signIn') navigation.navigate('SignIn', { email })
-    if (params.type === 'signUp') navigation.navigate('SignUp', { email })
-  }
-
   const redirect = () => {
     const { type } = params
-    reset({ email: '' })
     if (type === 'signIn') {
       navigation.navigate('Email', { type: 'signUp' })
     }
@@ -50,56 +34,21 @@ export const AuthEmail = () => {
 
   return (
     <View style={styles.page}>
-      <Text style={authFormStyles.title}>
+      <Text style={styles.title}>
         {params.type === 'signIn'
-          ? 'Sign in with yuor email'
-          : 'Sign up with yuor email'}
+          ? 'Sign in with your email'
+          : 'Sign up with your email'}
       </Text>
-      <View style={authFormStyles.icon}>
+      <View style={styles.icon}>
         <Email stroke={'#867EF8'} width={40} height={40} />
       </View>
-      <View style={authFormStyles.form}>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-            pattern:
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              keyboardType="email-address"
-              keyboardAppearance="dark"
-              placeholderTextColor={'#6F6F6F'}
-              placeholder="Your email"
-              cursorColor={'#867EF8'}
-              style={authFormStyles.input}
-              onBlur={onBlur}
-              onSubmitEditing={handleSubmit(onSubmit)}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="email"
-        />
-        {errors.email && (
-          <Text style={authFormStyles.error}>
-            {(errors.email.type === 'required' && 'Email is required') ||
-              'Invalid email'}
-          </Text>
-        )}
 
-        <TouchableOpacity
-          onPress={handleSubmit(onSubmit)}
-          style={authFormStyles.submitBtn}
-        >
-          <Text style={authFormStyles.btnText}>Continue</Text>
-        </TouchableOpacity>
-      </View>
+      <EmailForm />
+
       <TouchableOpacity onPress={redirect}>
         <Text style={styles.redirectLink}>
           {params.type === 'signIn'
-            ? 'Dont have an account?'
+            ? "Don't have an account?"
             : 'Already have an account?'}
         </Text>
       </TouchableOpacity>
@@ -116,7 +65,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
   },
+  title: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  icon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 
+    borderColor: '#867EF8',
+    borderWidth: 1,
+    borderRadius: 40,
+
+    width: 80,
+    height: 80,
+  },
   redirectLink: {
     color: '#fefefe',
     fontSize: 14,

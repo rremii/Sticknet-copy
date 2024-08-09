@@ -6,8 +6,6 @@ import Home from './../../../assets/home.svg'
 import { useModal } from '../../shared/moduls/modals/useModal'
 
 export const OpenActions = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
   const { openModal } = useModal()
 
   const onPress = () => {

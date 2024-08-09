@@ -27,10 +27,8 @@ export interface RegisterModal<PropsType> {
 export type AddModalAction<PropsType> = Action<'add', RegisterModal<PropsType>>
 export type RemoveModalAction = Action<'remove', ModalNames>
 export type CloseModalAction = Action<'close', ModalNames>
-// export type OpenModalAction = Action<'open', ModalNames>
 
 export type ModalAction =
   | AddModalAction<any> // TODO: fix some how
   | CloseModalAction
   | RemoveModalAction
-// | OpenModalAction

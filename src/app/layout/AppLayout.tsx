@@ -23,7 +23,8 @@ export const AppLayout: FC<Props> = ({ children }) => {
 
   const { bottom, left, right, top } = insets
 
-  const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
+  const navigation =
+    useNavigation<StackNavigationProp<AuthNavigationParam, 'Email'>>()
 
   useEffect(() => {
     navigation.navigate('Email')

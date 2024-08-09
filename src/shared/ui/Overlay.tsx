@@ -1,3 +1,4 @@
+import { useAnimatedValue } from '@shared/model/useAnimatedValue'
 import { Children, PropsWithChildren, useEffect, useRef, useState } from 'react'
 import {
   StyleSheet,
@@ -25,23 +26,20 @@ export const Overlay = ({
   endDuration = 300,
   zIndex = 1,
 }: Props) => {
-  const fadeAnim = useRef(new Animated.Value(0)).current
-
-  useEffect(() => {
-    if (isActive) {
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: startDuration,
-        useNativeDriver: true,
-      }).start()
-    } else {
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: endDuration,
-        useNativeDriver: true,
-      }).start()
-    }
-  }, [isActive])
+  const fadeAnim = useAnimatedValue({
+    isActive,
+    initValue: 0,
+    active: {
+      duration: startDuration,
+      value: 1,
+      delay: 0,
+    },
+    notActive: {
+      duration: endDuration,
+      value: 0,
+      delay: 0,
+    },
+  })
 
   return (
     <>

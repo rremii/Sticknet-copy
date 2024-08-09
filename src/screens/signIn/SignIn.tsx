@@ -16,68 +16,19 @@ import { useModal } from '@shared/moduls/modals/useModal'
 import { Toast, ToastType } from '@shared/ui/Toast'
 import { useLogin } from '@entities/auth/model/useLogin'
 import { LoginDto } from '@entities/auth/types'
-import { AuthError } from 'firebase/auth'
+import { AuthError, User } from 'firebase/auth'
 import { getAuthError } from '@entities/auth/constants/authErrors'
-
-interface FormValues {
-  password: string
-}
+import { auth } from 'firebase'
+import { SignInForm } from '@entities/auth/ui/SignInForm'
 
 export const SignIn = () => {
-  const navigation =
-    useNavigation<StackNavigationProp<AuthNavigationParam, 'SignIn'>>()
-  const { params } = useRoute<RouteProp<AuthNavigationParam, 'SignIn'>>()
-
-  const { control, handleSubmit, reset } = useForm<FormValues>()
-  const { login } = useLogin()
-
-  const onSubmit = async ({ password }: FormValues) => {
-    if (!params.email) return
-
-    const userCredential = await login({ email: params.email, password })
-    console.log(JSON.stringify(userCredential, null, 2))
-    reset({ password: '' })
-    if (userCredential) navigation.navigate('Root', { screen: 'Home' })
-  }
-
   return (
     <View style={styles.page}>
-      <Text style={authFormStyles.title}>Enter your password</Text>
-
-      <View style={authFormStyles.icon}>
+      <Text style={styles.title}>Enter your password</Text>
+      <View style={styles.icon}>
         <Email stroke={'#867EF8'} width={40} height={40} />
       </View>
-
-      <View style={authFormStyles.form}>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              keyboardType="visible-password"
-              keyboardAppearance="dark"
-              placeholderTextColor={'#6F6F6F'}
-              placeholder="Password"
-              cursorColor={'#867EF8'}
-              style={authFormStyles.input}
-              onBlur={onBlur}
-              onSubmitEditing={handleSubmit(onSubmit)}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="password"
-        />
-
-        <TouchableOpacity
-          onPress={handleSubmit(onSubmit)}
-          style={authFormStyles.submitBtn}
-        >
-          <Text style={authFormStyles.btnText}>Sign in</Text>
-        </TouchableOpacity>
-      </View>
+      <SignInForm />
     </View>
   )
 }
@@ -89,5 +40,22 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     gap: 20,
+  },
+  title: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  icon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    borderColor: '#867EF8',
+    borderWidth: 1,
+    borderRadius: 40,
+
+    width: 80,
+    height: 80,
   },
 })

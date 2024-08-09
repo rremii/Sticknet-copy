@@ -1,5 +1,6 @@
 import CheckMarkIcon from '@icons/check-mark.svg'
 import WarnIcon from '@icons/warn.svg'
+import { useAnimatedValue } from '@shared/model/useAnimatedValue'
 import { ModalProps } from '@shared/moduls/modals/types'
 import {
   FC,
@@ -23,24 +24,17 @@ interface Props extends ModalProps {
 export const Toast: FC<Props> = ({ children, type, isOpen }) => {
   const [toastWidth, setToastWidth] = useState<number>(0)
 
-  const slideAnim = useRef(new Animated.Value(100)).current
-
-  useEffect(() => {
-    if (isOpen) {
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        delay: 100,
-        duration: 300,
-        useNativeDriver: true,
-      }).start()
-    } else {
-      Animated.timing(slideAnim, {
-        toValue: 100,
-        duration: 300,
-        useNativeDriver: true,
-      }).start()
-    }
-  }, [isOpen])
+  const slideAnim = useAnimatedValue({
+    isActive: isOpen,
+    initValue: 100,
+    active: {
+      value: 0,
+      delay: 100,
+    },
+    notActive: {
+      value: 100,
+    },
+  })
 
   const onLayout = (event: LayoutChangeEvent) => {
     setToastWidth(event.nativeEvent.layout.width)

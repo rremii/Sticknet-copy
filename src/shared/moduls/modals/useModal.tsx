@@ -11,6 +11,7 @@ export const useModal = () => {
     duration?: number,
   ) {
     dispatch(addModal({ modal, name, props }))
+
     if (duration) {
       const timer = setTimeout(() => {
         close(name, duration)
@@ -24,7 +25,6 @@ export const useModal = () => {
 
     const timer = setTimeout(() => {
       dispatch(removeModal(name))
-
       clearTimeout(timer)
     }, removeDelay)
   }

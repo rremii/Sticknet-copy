@@ -1,23 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 
 export const authFormStyles = StyleSheet.create({
-  title: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  icon: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    borderColor: '#867EF8',
-    borderWidth: 1,
-    borderRadius: 40,
-
-    width: 80,
-    height: 80,
-  },
   form: {
     display: 'flex',
     gap: 10,

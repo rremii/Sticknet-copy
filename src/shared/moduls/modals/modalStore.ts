@@ -37,16 +37,7 @@ export const ModalReducer = (
         modals: [...state.modals, { modal, name, isOpen: true, props }],
       }
     }
-    // case 'open':
-    //   return {
-    //     ...state,
-    //     modals: state.modals.map((modal) => {
-    //       if (modal.name === action.payload) {
-    //         return { ...modal, isOpen: true }
-    //       }
-    //       return modal
-    //     }),
-    //   }
+
     case 'close':
       return {
         ...state,
@@ -75,11 +66,6 @@ export function addModal<PropsType>(
     payload,
   }
 }
-
-// export const openModal = (payload: ModalNames): OpenModalAction => ({
-// type: 'open',
-// payload,
-// })
 
 export const closeModal = (payload: ModalNames): CloseModalAction => ({
   type: 'close',
