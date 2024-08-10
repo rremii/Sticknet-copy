@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import { StyleSheet, Dimensions, TextInput } from 'react-native'
-import Email from '@icons/mail.svg'
+import PasswordIcon from '@icons/key.svg'
 import React, { useRef } from 'react'
 import { SignUpForm } from '@entities/auth/ui/SignUpForm'
 
@@ -10,7 +10,7 @@ export const SignUp = () => {
       <Text style={styles.title}>Come up with your password</Text>
 
       <View style={styles.icon}>
-        <Email stroke={'#867EF8'} width={40} height={40} />
+        <PasswordIcon stroke={'#867EF8'} width={40} height={40} />
       </View>
 
       <SignUpForm />

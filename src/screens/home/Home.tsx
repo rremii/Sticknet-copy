@@ -1,13 +1,16 @@
-import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs'
-import { RootNavigationParam } from '../../app/navigation/types'
+import { auth } from 'firebase.config'
+import React, { useEffect } from 'react'
+import { View, Text } from 'react-native'
 
 export const Home = () => {
+  const user = auth.currentUser
+
+  if (user) {
+  }
+
   return (
     <View>
-      <Text>Home</Text>
+      <Text>{user?.displayName}</Text>
     </View>
   )
 }

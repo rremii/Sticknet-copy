@@ -1,16 +1,10 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { Toast, ToastType } from '@shared/ui/Toast'
-import { useForm, Controller, SubmitErrorHandler, set } from 'react-hook-form'
-import { StyleSheet, Dimensions, TextInput } from 'react-native'
-import Email from '@icons/mail.svg'
+import { useForm, Controller } from 'react-hook-form'
+import { TextInput } from 'react-native'
 import { useRef } from 'react'
 import { useRegister } from '@entities/auth/model/useRegister'
-import { FirebaseError } from 'firebase/app'
-import { AuthError } from 'firebase/auth'
-import { getAuthError } from '@entities/auth/constants/authErrors'
 import { AuthNavigationParam } from 'src/app/navigation/types'
 import { authFormStyles } from './authFormStyles'
 
@@ -42,7 +36,11 @@ export const SignUpForm = () => {
     const userCredential = await register({ password, email: params.email })
 
     reset({ password: '', confirmPassword: '' })
-    if (userCredential) navigation.navigate('Root', { screen: 'Home' })
+    if (userCredential) {
+      console.log(JSON.stringify(userCredential))
+
+      navigation.navigate('Root', { screen: 'Home' })
+    }
   }
 
   const confirmPasswordRef = useRef<TextInput | null>(null)

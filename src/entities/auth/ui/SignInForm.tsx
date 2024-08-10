@@ -39,6 +39,7 @@ export const SignInForm = () => {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            secureTextEntry={true}
             keyboardType="visible-password"
             keyboardAppearance="dark"
             placeholderTextColor={'#6F6F6F'}

@@ -34,7 +34,7 @@ export const Overlay = ({
       value: 1,
       delay: 0,
     },
-    notActive: {
+    inActive: {
       duration: endDuration,
       value: 0,
       delay: 0,

@@ -2,14 +2,20 @@
 // import { FC, useEffect } from "react"
 // import { useNavigate } from "react-router-dom"
 
-// export const withAuthRedirect = (Component: FC) => () => {
-//   const navigate = useNavigate()
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { auth } from 'firebase.config'
+import { FC, useEffect } from 'react'
+import { AuthNavigationParam } from 'src/app/navigation/types'
 
-//   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
+export const withAuthRedirect = (Component: FC) => (props) => {
+  const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
-//   useEffect(() => {
-//     if (isLoggedIn === "rejected") navigate("/")
-//   }, [isLoggedIn])
+  useEffect(() => {
+    if (!auth.currentUser) {
+      navigation.navigate('Email', { type: 'signIn' })
+    } else navigation.navigate('Root', { screen: 'Home' })
+  }, [])
 
-//   return <Component />
-// }
+  return <Component {...props} />
+}

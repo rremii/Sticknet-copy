@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { ActionsModal } from './ActionsModal'
 import { Text, TouchableOpacity, StyleSheet, View } from 'react-native'
-import { Overlay } from '../../shared/ui/Overlay'
-import Home from './../../../assets/home.svg'
 import { useModal } from '../../shared/moduls/modals/useModal'
+import { ActionsModal } from '@features/actionsModal/ActionsModal'
 
 export const OpenActions = () => {
   const { openModal } = useModal()
@@ -13,7 +11,11 @@ export const OpenActions = () => {
   }
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.openBtn}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={onPress}
+      style={styles.openBtn}
+    >
       <Text style={styles.textContent}>+</Text>
     </TouchableOpacity>
   )

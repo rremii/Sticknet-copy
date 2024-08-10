@@ -1,20 +1,11 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  Dimensions,
-} from 'react-native'
+import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import Email from '@icons/mail.svg'
-import { useForm, Controller, SubmitErrorHandler } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { auth } from 'firebase'
-import { getAuth } from 'firebase/auth'
 import { AuthNavigationParam } from 'src/app/navigation/types'
 import { emailRegexPattern } from '../constants/regex'
 import { authFormStyles } from './authFormStyles'
+import { auth } from 'firebase.config'
 
 interface FormValues {
   email: string

@@ -15,9 +15,7 @@
       "tsconfigPaths": true
     },
     "ios": {
-      "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist",
-      "bundleIdentifier": "com.remii.sticknetclient"
+      "supportsTablet": true
     },
     "android": {
       "googleServicesFile": "./google-services.json",

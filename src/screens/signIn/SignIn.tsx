@@ -1,24 +1,5 @@
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  Dimensions,
-} from 'react-native'
-import { AuthNavigationParam } from '../../app/navigation/types'
-import Email from '@icons/mail.svg'
-import { useForm, Controller, SubmitErrorHandler } from 'react-hook-form'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { authFormStyles } from '@shared/ui/authFormStyles'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { Toast, ToastType } from '@shared/ui/Toast'
-import { useLogin } from '@entities/auth/model/useLogin'
-import { LoginDto } from '@entities/auth/types'
-import { AuthError, User } from 'firebase/auth'
-import { getAuthError } from '@entities/auth/constants/authErrors'
-import { auth } from 'firebase'
+import { View, Text, StyleSheet } from 'react-native'
+import PasswordIcon from '@icons/key.svg'
 import { SignInForm } from '@entities/auth/ui/SignInForm'
 
 export const SignIn = () => {
@@ -26,7 +7,7 @@ export const SignIn = () => {
     <View style={styles.page}>
       <Text style={styles.title}>Enter your password</Text>
       <View style={styles.icon}>
-        <Email stroke={'#867EF8'} width={40} height={40} />
+        <PasswordIcon stroke={'#867EF8'} width={40} height={40} />
       </View>
       <SignInForm />
     </View>

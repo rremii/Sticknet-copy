@@ -9,7 +9,7 @@ interface IAnimationParams {
     value: number
     delay?: number
   }
-  notActive: {
+  inActive: {
     duration?: number
     value: number
     delay?: number
@@ -20,7 +20,7 @@ const defaultDuration = 300
 export const useAnimatedValue = ({
   isActive,
   active,
-  notActive,
+  inActive,
   initValue,
 }: IAnimationParams) => {
   const animValue = useRef(new Animated.Value(initValue)).current
@@ -35,9 +35,9 @@ export const useAnimatedValue = ({
       }).start()
     } else {
       Animated.timing(animValue, {
-        toValue: notActive.value,
-        duration: notActive.duration || defaultDuration,
-        delay: notActive.delay || 0,
+        toValue: inActive.value,
+        duration: inActive.duration || defaultDuration,
+        delay: inActive.delay || 0,
         useNativeDriver: true,
       }).start()
     }

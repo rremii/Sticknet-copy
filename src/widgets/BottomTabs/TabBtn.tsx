@@ -2,17 +2,27 @@ import { PropsWithChildren } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { StyleSheet } from 'react-native'
 import Home from '@icons/home.svg'
+import { SvgProps } from 'react-native-svg'
 
 interface Props extends PropsWithChildren {
-  onPress: () => void
+  onPress?: () => void
+  Icon: React.FC<SvgProps>
+  isActive: boolean
 }
 
-export const TabBtn = ({ onPress, children }: Props) => {
+export const TabBtn = ({ onPress, children, Icon, isActive }: Props) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Home width={25} height={25} fill={'#fff'} />
-
-      <Text style={styles.textContent}>{children}</Text>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      style={styles.button}
+      onPress={onPress}
+    >
+      <Icon width={25} height={25} color={isActive ? '#867EF8' : '#fff'} />
+      <Text
+        style={[styles.textContent, { color: isActive ? '#867EF8' : '#fff' }]}
+      >
+        {children}
+      </Text>
     </TouchableOpacity>
   )
 }

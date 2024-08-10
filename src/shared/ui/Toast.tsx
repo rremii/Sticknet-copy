@@ -31,7 +31,7 @@ export const Toast: FC<Props> = ({ children, type, isOpen }) => {
       value: 0,
       delay: 100,
     },
-    notActive: {
+    inActive: {
       value: 100,
     },
   })

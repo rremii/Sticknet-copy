@@ -1,19 +1,8 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  Dimensions,
-} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { AuthNavigationParam } from '../../app/navigation/types'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import Email from '@icons/mail.svg'
-import { useForm, Controller, SubmitErrorHandler } from 'react-hook-form'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { authFormStyles } from '@shared/ui/authFormStyles'
-import { auth } from 'firebase'
-import { getAuth } from 'firebase/auth'
 import React from 'react'
 import { EmailForm } from '@entities/auth/ui/EmailForm'
 

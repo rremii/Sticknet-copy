@@ -3,29 +3,23 @@ import { Text, StyleSheet, Dimensions, Animated } from 'react-native'
 import { ModalProps } from '../../shared/moduls/modals/types'
 import { Overlay } from '../../shared/ui/Overlay'
 import { useModal } from '../../shared/moduls/modals/useModal'
+import { useAnimatedValue } from '@shared/model/useAnimatedValue'
 
 interface Props extends ModalProps {}
 
 export const ActionsModal: FC<Props> = ({ isOpen, name }) => {
   const { closeModal } = useModal()
 
-  const slideAnim = useRef(new Animated.Value(500)).current
-
-  useEffect(() => {
-    if (isOpen) {
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start()
-    } else {
-      Animated.timing(slideAnim, {
-        toValue: 500,
-        duration: 300,
-        useNativeDriver: true,
-      }).start()
-    }
-  }, [isOpen])
+  const slideAnim = useAnimatedValue({
+    initValue: 500,
+    isActive: isOpen,
+    active: {
+      value: 0,
+    },
+    inActive: {
+      value: 500,
+    },
+  })
 
   return (
     <>
