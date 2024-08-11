@@ -61,7 +61,7 @@ const styles = ({
     pageLayout: {
       flex: 1,
       display: 'flex',
-      backgroundColor: '#fff',
+      backgroundColor: '#1B1B1B',
       paddingTop,
       paddingBottom,
       paddingLeft,

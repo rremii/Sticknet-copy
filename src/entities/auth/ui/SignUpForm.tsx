@@ -105,7 +105,7 @@ export const SignUpForm = () => {
         onPress={handleSubmit(onSubmit)}
         style={authFormStyles.submitBtn}
       >
-        <Text style={authFormStyles.btnText}>Sign in</Text>
+        <Text style={authFormStyles.btnText}>Sign up</Text>
       </TouchableOpacity>
     </View>
   )

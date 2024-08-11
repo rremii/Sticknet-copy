@@ -1,18 +1,18 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { Home } from '../../screens/home/Home';
-import { Profile } from '../../screens/profile/Profile';
-import { Vault } from '../../screens/vault/Vault';
-import { Chats } from '../../screens/chats/Chats';
-import { BottomTabs } from '../../widgets/BottomTabs/BottomTabs';
-import { AuthEmail } from '../../screens/authEmail/AuthEmail';
-import { createStackNavigator } from '@react-navigation/stack';
-import { SignIn } from '../../screens/signIn/SignIn';
-import { SignUp } from '../../screens/signUp/SignUp';
-import { AuthNavigationParam, RootNavigationParam } from './types';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import { Home } from '../../screens/home/Home'
+import { Profile } from '../../screens/profile/Profile'
+import { Vault } from '../../screens/vault/Vault'
+import { Chats } from '../../screens/chats/Chats'
+import { BottomTabs } from '../../widgets/bottomTabs/BottomTabs'
+import { AuthEmail } from '../../screens/authEmail/AuthEmail'
+import { createStackNavigator } from '@react-navigation/stack'
+import { SignIn } from '../../screens/signIn/SignIn'
+import { SignUp } from '../../screens/signUp/SignUp'
+import { AuthNavigationParam, RootNavigationParam } from './types'
 
-const Tab = createBottomTabNavigator<RootNavigationParam>();
-const AuthStack = createStackNavigator<AuthNavigationParam>();
+const Tab = createBottomTabNavigator<RootNavigationParam>()
+const AuthStack = createStackNavigator<AuthNavigationParam>()
 
 const AuthNavigation = () => {
   return (
@@ -26,8 +26,8 @@ const AuthNavigation = () => {
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="Root" component={RootNavigation} />
     </AuthStack.Navigator>
-  );
-};
+  )
+}
 
 const RootNavigation = () => {
   return (
@@ -40,7 +40,7 @@ const RootNavigation = () => {
       <Tab.Screen name="Chats" component={Chats} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
-  );
-};
+  )
+}
 
-export default AuthNavigation;
+export default AuthNavigation

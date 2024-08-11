@@ -10,6 +10,7 @@ export const OpenActions = () => {
     openModal({ name: 'Actions', modal: ActionsModal })
   }
 
+  // TODO: add icon
   return (
     <TouchableOpacity
       activeOpacity={0.5}
@@ -28,13 +29,13 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     borderWidth: 2,
     borderRadius: 50,
-    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textContent: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: -9 }, { translateY: -22 }],
+    height: 40,
+    width: 40,
+    textAlign: 'center',
     color: '#fff',
     fontSize: 30,
   },
