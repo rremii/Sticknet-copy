@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "813025183286",
+    "project_id": "sticknet-client",
+    "storage_bucket": "sticknet-client.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813025183286:android:1519ab33f02fcca56e7a97",
+        "android_client_info": {
+          "package_name": "com.remii.sticknetclient"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6SBjIbdnllqmKjV2Dor3ppdVf2LcklSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

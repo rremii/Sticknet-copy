@@ -1,63 +1,59 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import React from 'react'
-import {
-  View,
-  Text,
-  FlatList,
-  Modal,
-  LayoutChangeEvent,
-  Dimensions,
-} from 'react-native'
+import React, { Fragment } from 'react'
+import { View } from 'react-native'
 import { TabBtn } from './TabBtn'
 import { StyleSheet } from 'react-native'
-
-const OpenActions = () => {
-  return (
-    <>
-      <Text>OpenActions</Text>
-      <View style={actionsStyles(-500).modal}>
-        <Text>Modal</Text>
-      </View>
-    </>
-  )
-}
-
-const actionsStyles = (bottom: number = 0) =>
-  StyleSheet.create({
-    modal: {
-      position: 'absolute',
-      bottom,
-      zIndex: 100,
-      left: 0,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(49, 176, 102, 0.5)',
-      width: Dimensions.get('window').width,
-      height: 500,
-    },
-  })
+import { OpenActions } from '@features/openActionsModal/OpenActions'
+import HomeIcon from '@icons/home.svg'
+import ProfileIcon from '@icons/profile.svg'
+import ChatsIcon from '@icons/chat.svg'
+import VaultIcon from '@icons/vault.svg'
+import { RootNavigationParam } from 'src/app/navigation/types'
+import Svg, { SvgProps } from 'react-native-svg'
 
 export const BottomTabs = ({ navigation, state }: BottomTabBarProps) => {
   const goToTab = (routeName: keyof typeof state.routeNames) => {
     navigation.navigate(routeName)
   }
 
+  const iconsByRouteName: Record<
+    keyof RootNavigationParam,
+    React.FC<SvgProps>
+  > = {
+    Home: HomeIcon,
+    Profile: ProfileIcon,
+    Vault: VaultIcon,
+    Chats: ChatsIcon,
+  }
+
   return (
     <View style={styles.container}>
-      {state.routeNames.map((route, index) => {
+      {state.routes.map((route, index) => {
         const isMiddleIndex =
-          index === Math.round((state.routes.length - 1) / 2)
+          index === Math.floor((state.routeNames.length - 1) / 2)
 
+        const Icon = iconsByRouteName[route.name] as React.FC<SvgProps>
+
+        const isActive = state.index === index
         return isMiddleIndex ? (
-          <>
-            <OpenActions />
-            <TabBtn key={index} onPress={() => goToTab(route)}>
-              {route}
+          <Fragment key={route.key}>
+            <TabBtn
+              isActive={isActive}
+              onPress={() => goToTab(route.name)}
+              Icon={Icon}
+            >
+              {route.name}
             </TabBtn>
-          </>
+            <OpenActions />
+          </Fragment>
         ) : (
-          <TabBtn key={index} onPress={() => goToTab(route)}>
-            {route}
+          <TabBtn
+            isActive={isActive}
+            key={route.key}
+            onPress={() => goToTab(route.name)}
+            Icon={Icon}
+          >
+            {route.name}
           </TabBtn>
         )
       })}
@@ -75,7 +71,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: '100%',
-    height: 50,
-    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#000',
   },
 })
